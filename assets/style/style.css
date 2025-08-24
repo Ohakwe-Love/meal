@@ -1,0 +1,234 @@
+/* https://preview.colorlib.com/#meal2 */
+
+
+:root{
+    --primary-color:  #ff5200;
+    --text-color: #007bff;
+    --shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+    --text-lightColor: white;
+    --text-darkColor: #333;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #fee2b3;
+}
+
+.heroContainer{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../images/hero_bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+.heroContainer header{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 40px;
+    align-items: center;
+    width: 100%;
+}
+
+.heroContainer header h1{
+    color: var(--text-lightColor);
+    text-transform: capitalize;
+   font-family: monospace;
+}
+.heroContainer header h1 span{
+    color: var(--primary-color);
+}
+
+.heroContainer header nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.heroContainer header nav ul li{
+    list-style: none;
+    text-transform: capitalize;
+    font-family: arial;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: .7s;
+}
+
+.heroContainer header nav ul li a{
+    color: rgb(143, 142, 142);
+    text-decoration: none;
+}
+
+.heroContainer header nav ul li a:hover{
+    color: var(--text-lightColor);
+}
+
+.meal-header-button{
+    background-color: var(--primary-color);
+    text-transform: uppercase;
+    padding: 10px 17px;
+    border: none;
+    border-radius: 18px;
+    font-size: 10.5px;
+    word-spacing: 2.8px;
+}
+
+.meal-header-button a{
+    color: var(--text-lightColor);
+    text-decoration: none;
+}
+
+.hero{
+    color: var(--text-lightColor);
+    width: 48%;
+    height: 53%;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.hero-enjoy-pTag{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: arial;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.hero h1{
+    text-transform: capitalize;
+    font-size: 70px;
+    font-family: cambria;
+    margin-bottom: 10px;
+}
+
+.hero-description-pTag{
+    font-family: tahoma, san-serif;
+    line-height: 1.5;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.hero button{
+    padding: 14px 20px;
+    letter-spacing: 1.5px;
+}
+
+.heroIconDiv{
+    width: 157px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute; 
+    right: 30px;
+    bottom: 30px;
+}
+
+.heroIconDiv span{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--text-lightColor);
+    padding: 10px;
+    border-radius: 50%;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+/* end of hero container styles */
+
+/* start of popular dessert styles */
+.popularDessert{
+    width: 100%;
+    padding: 40px;
+}
+
+.popularDessert-choose-pTag, .popularDessertHeader{
+    color: #333;
+    text-align: center;
+}
+
+.popularDessertHeader{
+    font-weight: 100;
+    font-size: 30px;
+    text-transform: capitalize;
+    font-family: cambria;
+    margin-bottom: 20px;
+}
+
+.popularDessertHeader span{
+    font-weight: 900;
+    color: var(--primary-color);
+}
+
+.popularDessert-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+}
+
+.popularDessert-col{
+    width: 23%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3.5px;
+    border: 0.0001px solid rgb(133, 133, 133);
+    padding: 20px;
+    cursor: pointer;
+    transition: .7s;
+    height: 140px;
+}
+
+.popularDessert-col:hover{
+    background-color: var(--text-lightColor);
+    border: none;
+}
+
+.dessertImg{
+    display: block;
+    width: 28%;
+}
+
+.dessertImgText h3{
+    font-weight: 100;
+    font-size: 20.8px;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.dessertImgText p{
+    font-size: 20.8px;
+    color: var(--primary-color);
+    font-family: trebuchet MS;
+}
+
+.popularDessert-col:nth-child(3) .dessertImg,
+.popularDessert-col:last-child .dessertImg{
+    width: 35%;
+}
+/* end of popular dessert styles */
+
+/* start of customers and Gallery styles */
+.customersGallery{
+    width: 100%;
+    height: 660px;
+    background: linear-gradient(rgba(245, 201, 126, 0.7), rgba(245, 201, 126, 0.7)), url(../images/customersGallery.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+/* end of customers and Gallery styles */
