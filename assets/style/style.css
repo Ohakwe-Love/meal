@@ -1,29 +1,98 @@
-:root{
-    --primary-color:  #ff5200;
-    --text-color: #007bff;
+:root {
+    --primary-color: #ff5200;
+    --bg-color: #fee2b3;
+    --white: #fff;
+    --black: #000;
     --shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
-    --text-lightColor: white;
-    --text-darkColor: #333;
+    --primary-font: 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --text-dark: #333;
+    --headings-font: 'Playfair Display', serif;
 }
 
-*{
+@font-face {
+    font-family: 'Nunito';
+    src: local('Nunito'), url('../fonts/Nunito/static/Nunito-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito/static/Nunito-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito/static/Nunito-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
-    background-color: #fee2b3;
+body {
+    background-color: var(--bg-color);
+    font-family: var(--primary-font);
+    color: var(--text-dark);
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--headings-font);
 }
 
 li {
     list-style: none;
 }
 
-.heroContainer{
+a {
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 10px;
+}
+
+.heroContainer {
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../images/hero_bg.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../images/hero_bg.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -35,131 +104,158 @@ li {
     position: relative;
 }
 
-.heroContainer header{
-    display: flex;
-    justify-content: space-between;
-    padding: 25px 40px;
-    align-items: center;
+header {
+    padding: 25px 0;
     width: 100%;
 }
 
-.heroContainer header h1{
-    color: var(--text-lightColor);
-    text-transform: capitalize;
-   font-family: monospace;
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.heroContainer header h1 span{
+
+header .logo {
+    color: var(--white);
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+header .logo span {
     color: var(--primary-color);
 }
 
-.heroContainer header nav ul{
+header nav ul {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
 }
 
-.heroContainer header nav ul li{
+header nav ul li {
     list-style: none;
     text-transform: capitalize;
-    font-family: arial;
-    font-size: 13px;
-    letter-spacing: 2px;
-    transition: .7s;
+    font-size: 15px;
 }
 
-.heroContainer header nav ul li a{
-    color: rgb(143, 142, 142);
+header nav ul li a {
+    color: var(--white);
+    opacity: 0.6;
     text-decoration: none;
 }
 
-.heroContainer header nav ul li a:hover{
-    color: var(--text-lightColor);
+header nav ul li a:hover {
+    opacity: 1;
 }
 
-.meal-header-button{
-    background-color: var(--primary-color);
-    text-transform: uppercase;
-    padding: 10px 17px;
+.primary-btn{
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 13px 32px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
     border: none;
-    border-radius: 18px;
-    font-size: 10.5px;
-    word-spacing: 2.8px;
+    cursor: pointer;
+    display: inline-block;
+    text-transform: capitalize;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.meal-header-button a{
-    color: var(--text-lightColor);
-    text-decoration: none;
+.primary-btn::after{
+    width: 0%;
+    height: 100%;
+    content: "";
+    background-color: var(--white);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: 0.5s;
 }
 
-.hero{
-    color: var(--text-lightColor);
+.primary-btn:hover {
+    color: var(--primary-color);
+}
+
+.primary-btn:hover::after {
+    width: 100%;
+}
+
+.hero {
+    color: var(--white);
     width: 48%;
     height: 53%;
     margin-top: 50px;
     text-align: center;
 }
 
-.hero-enjoy-pTag{
+.hero-enjoy-pTag {
     font-size: 12px;
     text-transform: uppercase;
-    font-family: arial;
     font-weight: 700;
     letter-spacing: 2px;
     margin-bottom: 8px;
 }
 
-.hero h1{
+.hero h1 {
     text-transform: capitalize;
     font-size: 70px;
-    font-family: cambria;
+    font-family: 'Playfair Display', serif;
     margin-bottom: 10px;
 }
 
-.hero-description-pTag{
-    font-family: tahoma, san-serif;
+.hero-description-pTag {
     line-height: 1.5;
     font-size: 18px;
     margin-bottom: 15px;
 }
 
-.hero button{
+.hero button {
     padding: 14px 20px;
     letter-spacing: 1.5px;
 }
 
-.heroIconDiv{
+.heroIconDiv {
     width: 157px;
     display: flex;
     justify-content: space-between;
-    position: absolute; 
+    position: absolute;
     right: 30px;
     bottom: 30px;
 }
 
-.heroIconDiv span{
+.heroIconDiv span {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--text-lightColor);
+    background-color: var(--white);
     padding: 10px;
     border-radius: 50%;
     color: var(--primary-color);
     cursor: pointer;
 }
+
 /* end of hero container styles */
 
 /* start of popular dessert styles */
-.popularDessert{
+.popularDessert {
     width: 100%;
     padding: 40px;
 }
 
-.popularDessert-choose-pTag, .popularDessertHeader{
+.popularDessert-choose-pTag,
+.popularDessertHeader {
     color: #333;
     text-align: center;
 }
 
-.popularDessertHeader{
+.popularDessertHeader {
     font-weight: 100;
     font-size: 30px;
     text-transform: capitalize;
@@ -167,12 +263,12 @@ li {
     margin-bottom: 20px;
 }
 
-.popularDessertHeader span{
+.popularDessertHeader span {
     font-weight: 900;
     color: var(--primary-color);
 }
 
-.popularDessert-row{
+.popularDessert-row {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -180,7 +276,7 @@ li {
     padding: 20px 100px;
 }
 
-.popularDessert-col{
+.popularDessert-col {
     width: 23%;
     display: flex;
     justify-content: space-between;
@@ -193,37 +289,38 @@ li {
     height: 140px;
 }
 
-.popularDessert-col:hover{
-    background-color: var(--text-lightColor);
+.popularDessert-col:hover {
+    background-color: var(--white);
     border: none;
 }
 
-.dessertImg{
+.dessertImg {
     display: block;
     width: 28%;
 }
 
-.dessertImgText h3{
+.dessertImgText h3 {
     font-weight: 100;
     font-size: 20.8px;
     text-transform: capitalize;
     margin-bottom: 10px;
 }
 
-.dessertImgText p{
+.dessertImgText p {
     font-size: 20.8px;
     color: var(--primary-color);
     font-family: trebuchet MS;
 }
 
 .popularDessert-col:nth-child(3) .dessertImg,
-.popularDessert-col:last-child .dessertImg{
+.popularDessert-col:last-child .dessertImg {
     width: 35%;
 }
+
 /* end of popular dessert styles */
 
 /* start of customers and Gallery styles */
-.customersGallery{
+.customersGallery {
     width: 100%;
     height: 660px;
     background: linear-gradient(rgba(245, 201, 126, 0.7), rgba(245, 201, 126, 0.7)), url(../images/customersGallery.jpg);
@@ -231,4 +328,5 @@ li {
     background-position: center;
     background-attachment: fixed;
 }
+
 /* end of customers and Gallery styles */
