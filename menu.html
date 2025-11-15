@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Foods - Breakfast Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5deb3 0%, #e6c89a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-header h1 {
+            font-size: 42px;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .sidebar-header h1 .highlight {
+            color: #ff6b35;
+        }
+
+        .menu-nav {
+            list-style: none;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item.active {
+            background: white;
+            color: #ff6b35;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2);
+        }
+
+        .menu-item .icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .content-header h2 {
+            font-size: 48px;
+            color: #333;
+        }
+
+        .pagination {
+            font-size: 18px;
+            color: #888;
+        }
+
+        /* Food Grid */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .food-card:nth-child(1) { animation-delay: 0.1s; }
+        .food-card:nth-child(2) { animation-delay: 0.2s; }
+        .food-card:nth-child(3) { animation-delay: 0.3s; }
+        .food-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .food-card:hover .food-image {
+            transform: scale(1.1);
+        }
+
+        .food-info {
+            padding: 25px;
+        }
+
+        .food-name {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .food-price {
+            font-size: 22px;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 250px 1fr;
+                gap: 30px;
+            }
+
+            .food-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .menu-nav {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .food-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .sidebar {
+                padding: 20px;
+            }
+
+            .sidebar-header h1 {
+                font-size: 32px;
+            }
+
+            .main-content {
+                padding: 25px;
+            }
+
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .content-header h2 {
+                font-size: 36px;
+            }
+
+            .menu-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .food-card {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar-header h1 {
+                font-size: 28px;
+            }
+
+            .content-header h2 {
+                font-size: 28px;
+            }
+
+            .menu-item {
+                font-size: 16px;
+                padding: 15px;
+            }
+
+            .food-name {
+                font-size: 20px;
+            }
+
+            .food-price {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>SELECT YOUR MEAL</h3>
+                <h1>Popular <span class="highlight">Foods</span></h1>
+            </div>
+            <ul class="menu-nav">
+                <li class="menu-item active" data-category="breakfast">
+                    <span class="icon">🍳</span>
+                    <span>Breakfast</span>
+                </li>
+                <li class="menu-item" data-category="lunch">
+                    <span class="icon">🍱</span>
+                    <span>Lunch</span>
+                </li>
+                <li class="menu-item" data-category="dinner">
+                    <span class="icon">🥙</span>
+                    <span>Dinner</span>
+                </li>
+                <li class="menu-item" data-category="drinks">
+                    <span class="icon">🥤</span>
+                    <span>Drinks</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2 id="category-title">Breakfast</h2>
+                <div class="pagination">1/4</div>
+            </div>
+
+            <div class="food-grid" id="food-grid">
+                <!-- Food items will be inserted here -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const foodData = {
+            breakfast: [
+                {
+                    name: "Italian Sauce Mushroom",
+                    price: "$19.00",
+                    image: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&q=80"
+                },
+                {
+                    name: "Salted Fried Chicken",
+                    price: "$19.00",
+                    image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800&q=80"
+                },
+                {
+                    name: "Fried Potato w/ Garlic",
+                    price: "$19.00",
+                    image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800&q=80"
+                },
+                {
+                    name: "Shrimp and Olive",
+                    price: "$19.00",
+                    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80"
+                }
+            ],
+            lunch: [
+                {
+                    name: "Grilled Salmon Bowl",
+                    price: "$24.00",
+                    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80"
+                },
+                {
+                    name: "Caesar Salad Special",
+                    price: "$16.00",
+                    image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=800&q=80"
+                },
+                {
+                    name: "Beef Burger Deluxe",
+                    price: "$18.00",
+                    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80"
+                },
+                {
+                    name: "Pasta Carbonara",
+                    price: "$20.00",
+                    image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80"
+                }
+            ],
+            dinner: [
+                {
+                    name: "Ribeye Steak Premium",
+                    price: "$35.00",
+                    image: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=80"
+                },
+                {
+                    name: "Lobster Thermidor",
+                    price: "$42.00",
+                    image: "https://images.unsplash.com/photo-1559737558-2f5a35f4523f?w=800&q=80"
+                },
+                {
+                    name: "Grilled Lamb Chops",
+                    price: "$38.00",
+                    image: "https://images.unsplash.com/photo-1529694157872-4e0c0f3b238b?w=800&q=80"
+                },
+                {
+                    name: "Seafood Platter",
+                    price: "$45.00",
+                    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80"
+                }
+            ],
+            drinks: [
+                {
+                    name: "Fresh Orange Juice",
+                    price: "$8.00",
+                    image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=800&q=80"
+                },
+                {
+                    name: "Strawberry Smoothie",
+                    price: "$10.00",
+                    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=800&q=80"
+                },
+                {
+                    name: "Iced Coffee Latte",
+                    price: "$7.00",
+                    image: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=800&q=80"
+                },
+                {
+                    name: "Green Detox Juice",
+                    price: "$9.00",
+                    image: "https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=800&q=80"
+                }
+            ]
+        };
+
+        const menuItems = document.querySelectorAll('.menu-item');
+        const foodGrid = document.getElementById('food-grid');
+        const categoryTitle = document.getElementById('category-title');
+
+        function renderFoodItems(category) {
+            foodGrid.innerHTML = '';
+            
+            foodData[category].forEach((item, index) => {
+                const foodCard = document.createElement('div');
+                foodCard.className = 'food-card';
+                foodCard.style.animationDelay = `${index * 0.1}s`;
+                
+                foodCard.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="food-image">
+                    <div class="food-info">
+                        <h3 class="food-name">${item.name}</h3>
+                        <p class="food-price">${item.price}</p>
+                    </div>
+                `;
+                
+                foodGrid.appendChild(foodCard);
+            });
+        }
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuItems.forEach(mi => mi.classList.remove('active'));
+                item.classList.add('active');
+                
+                const category = item.dataset.category;
+                categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                
+                renderFoodItems(category);
+            });
+        });
+
+        // Initial render
+        renderFoodItems('breakfast');
+    </script>
+</body>
+</html>
